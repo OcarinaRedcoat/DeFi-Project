@@ -1,0 +1,5 @@
+# General
+.DS_Store
+__pycache__/
+py-algorand-sdk
+idx_address.py
