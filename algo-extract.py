@@ -10,18 +10,18 @@ from time import time
 
 from idx_address import *
 
-TIME_LIMIT_SECONDS = 3600
-HALT_LEEWAY_SECONDS = 120
 USE_INTERNAL_INDEXER = False
 
 
-def extract_row_data(response_row: Dict) -> Dict:
+def extract_row_data(response_row: Dict, timestamp) -> Dict:
     row_data = {}
     
     row_data["id"] = response_row["id"]
     row_data["sender"] = response_row["sender"]
     row_data["tx_type"] = response_row["tx-type"]
-    
+
+    row_data["timestamp"] = timestamp
+
     if row_data["tx_type"] == "pay":
         row_data["amount"] = response_row["payment-transaction"]["amount"]
         row_data["receiver"] = response_row["payment-transaction"]["receiver"]
@@ -32,9 +32,8 @@ def extract_row_data(response_row: Dict) -> Dict:
 if __name__ == "__main__":
 
     start_time = time()
-    HALT_THRESHOLD = TIME_LIMIT_SECONDS - HALT_LEEWAY_SECONDS
 
-    min_round = 18150150 
+    min_round = 18363444 + 10000 # FIRST BLOCK OF 2022 
 
     print("Determined min_round = {}".format(min_round))
 
@@ -53,7 +52,7 @@ if __name__ == "__main__":
     max_round_inclusive = current_round - 1
 
     row_list = []
-    current_round = min_round + 10
+    current_round = min_round + 100000
     for request_round in tqdm(range(min_round, current_round)):
 
         try:
@@ -67,13 +66,12 @@ if __name__ == "__main__":
 
         if QUERY_SUCCESS:
             for response_row in indexer_response["transactions"]:
-                
+
                 if(response_row['tx-type'] == 'pay'):
                     
-                    row_list.append(extract_row_data(response_row))
+                    row_list.append(extract_row_data(response_row, indexer_response['timestamp']))
 
-        time_now = time() - start_time
-        if (not QUERY_SUCCESS) or (time_now > HALT_THRESHOLD):
+        if (not QUERY_SUCCESS):
             max_round_inclusive = request_round
             current_round = max_round_inclusive + 1
             print(
@@ -85,7 +83,7 @@ if __name__ == "__main__":
                       columns=[
                           "id", "sender",
                           "receiver",
-                          "amount", "tx_type"
+                          "amount", "tx_type", "timestamp"
                       ])
 
     print("Created DataFrame, now saving...")
