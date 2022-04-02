@@ -28,12 +28,11 @@ def extract_row_data(response_row: Dict, timestamp) -> Dict:
 
     return row_data
 
-
 if __name__ == "__main__":
 
     start_time = time()
 
-    min_round = 18363444 + 10000 # FIRST BLOCK OF 2022 
+    min_round = 18363444 + 10000 + 10000 # FIRST BLOCK OF 2022 
 
     print("Determined min_round = {}".format(min_round))
 
@@ -52,7 +51,7 @@ if __name__ == "__main__":
     max_round_inclusive = current_round - 1
 
     row_list = []
-    current_round = min_round + 100000
+    current_round = min_round + 1000
     for request_round in tqdm(range(min_round, current_round)):
 
         try:
