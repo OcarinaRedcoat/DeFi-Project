@@ -1,14 +1,10 @@
 import csv
 from collections import defaultdict
-from fileinput import filename
-import json
 import sys
-from datetime import datetime
 from tqdm import tqdm
-from numpy import double
 from time import time
+import json
 
-from collections import defaultdict
   
 class Graph:
   
@@ -32,7 +28,7 @@ class Graph:
         self.Time += 1
         stackMember[u] = True
         st.append(u)
- 
+
         for v in self.graph[u]:
              
             if disc[v] == -1 :
@@ -44,14 +40,16 @@ class Graph:
             elif stackMember[v] == True:
  
                 low[u] = min(low[u], disc[v])
- 
+
+        scc = list()
         w = -1
         if low[u] == disc[u]:
             self.numberSCC += 1
             while w != u:
                 w = st.pop()
-
+                scc.append(w)
                 stackMember[w] = False
+        return scc
                  
     def SCC(self):
   
@@ -59,11 +57,15 @@ class Graph:
         low = [-1] * (self.V)
         stackMember = [False] * (self.V)
         st =[]
-         
+        bscc = list()
         for i in tqdm(range(self.V)):
             if disc[i] == -1:
-                self.SCCUtil(i, low, disc, stackMember, st)
- 
+                scc = self.SCCUtil(i, low, disc, stackMember, st)
+            if len(bscc) < len(scc):
+                bscc.clear()
+                bscc = scc.copy()
+        print("Length of the Biggest SCC: ", len(bscc))
+        return bscc
  
   
   
@@ -75,6 +77,7 @@ if __name__ == "__main__":
     start_time = time()
     sys.setrecursionlimit(10**6)
     wallet_map = dict()
+    wallet_map_inverse = dict()
     wallet_list = list()
 
     tx_list = list()
@@ -91,11 +94,13 @@ if __name__ == "__main__":
                 wallet_list.append(row['sender'])
                 index = len(wallet_list)-1
                 wallet_map[row['sender']] = index 
+                wallet_map_inverse[index] = row['sender']
 
             if wallet_map.get(row['receiver']) == None:
                 wallet_list.append(row['receiver'])
                 index = len(wallet_list)-1
                 wallet_map[row['receiver']] = index
+                wallet_map_inverse[index] = row['receiver']
 
             tx_list.append((wallet_map[row['sender']], wallet_map[row['receiver']]))
 
@@ -106,7 +111,16 @@ if __name__ == "__main__":
 
     print("Calculating number of SCCs...")
 
-    g.SCC()
+    largest_scc = g.SCC()
+    largest_scc_mapped = list()
+    
+    for i in tqdm(range(len(largest_scc))):
+        wallet_map_id = largest_scc[i]
+        largest_scc_mapped.append(wallet_map_inverse.get(wallet_map_id))
+
+    with open(file_name + "_largest_scc", "w") as f:
+        f.write(json.dumps(largest_scc_mapped))
+        f.close()
 
     print("Network of ", len(wallet_list), " nodes (wallets) and ", len(tx_list), " edges (transactions)")
     print("Number of SCCs", g.numberSCC)
