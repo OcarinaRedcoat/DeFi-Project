@@ -96,9 +96,15 @@ if __name__ == "__main__":
         wallet_map_id = largest_cc[i]
         largest_wcc_mapped.append(wallet_map_inverse.get(wallet_map_id))
 
-    with open(file_name + "_largest_wcc", "w") as f:
-        f.write(json.dumps(largest_wcc_mapped))
-        f.close()
+    filename_split = file_name.split('/')
+
+    folder_name = filename_split[0]
+
+    extract_name = filename_split[1].split('.')
+
+    f = open(filename_split[0] + '/output/' + extract_name[0] + "_largest_wcc", "w")
+    f.write(json.dumps(largest_wcc_mapped))
+    f.close()
 
     print("Network of ", len(wallet_list), " nodes (wallets) and ", len(tx_list), " edges (transactions)")
     print("Number of WCCs", len(cc))
