@@ -1,7 +1,3 @@
-# Python program to print connected
-# components in an undirected graph
- 
- 
 import csv
 import json
 import sys

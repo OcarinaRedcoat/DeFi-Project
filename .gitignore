@@ -4,3 +4,7 @@ __pycache__/
 py-algorand-sdk
 idx_address.py
 .vscode
+defi-env/
+dexanches_wallet.txt
+extract-data/
+DeFi-Viz/data/

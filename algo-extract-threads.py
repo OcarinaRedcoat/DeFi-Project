@@ -74,7 +74,7 @@ if __name__ == "__main__":
     start_time = time()
 
     # TODO: Refazer of 10000 primeiros
-    min_round = 18363444 + 10000 + 10000 # FIRST BLOCK OF 2022 
+    min_round = 18363444 #+ 10000 + 10000 # FIRST BLOCK OF 2022 
 
     round_per_thread = int(int(sys.argv[2])/numThreads)
 
@@ -133,7 +133,7 @@ if __name__ == "__main__":
     print("Created DataFrame, now saving...")
     tempdir = "extract-data"
     os.makedirs(tempdir, exist_ok=True)
-    filename = "BBBAAAAAAA_{}_{}.csv".format(
+    filename = "EXTRACT_{}_{}.csv".format(
         str(min_round).rjust(9, "0"),
         str(current_round_threads[numThreads-1]).rjust(9, "0"))
     temppath = os.path.join(tempdir, filename)
