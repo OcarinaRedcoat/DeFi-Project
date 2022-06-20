@@ -1,0 +1,134 @@
+/* divs */
+/* .grid-cell {
+    margin: 20px;
+} */
+
+.btn {
+    background-color: #606060;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+/* #reset {
+
+} */
+
+
+/* html title */
+.title {
+    font-family: 'Montserrat', sans-serif;
+    margin-top:  1px;
+    margin-bottom: 1px;
+    margin-left: 0px;
+    margin-right: 0px;
+    color: #ffffff;
+}
+
+.idiom-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    text-anchor: middle;
+    text-align: center;
+    margin-top:  1px;
+    margin-bottom: 0.5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    color: #000000;
+}
+
+
+/* text on axis */
+.axisSubtitle {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.axisLabel {
+    font-family: 'Montserrat', sans-serif;
+    fill: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+/* map */
+.paths-map {
+    fill: #808080;
+    stroke: #000000;
+}
+
+/* circles in bubble map */
+.circle-map {
+    fill: #000000;
+}
+
+/* bars on barchart */
+.bars-style {
+    fill: #808080;
+    stroke: #ffffff;
+}
+
+
+/* Linechart */
+.line-lineplot {
+    fill: none;
+    stroke-width: 3px;
+}
+
+
+/* Network link*/
+.network-link {
+    fill: steelblue;
+    stroke:#aaa;
+    opacity:1;
+}
+
+/* Network node */
+.network-node {
+    /* fill: steelblue; */
+    stroke:steelblue;
+    stroke-width:3px;
+}
+
+
+/* Lollipop lines */
+.lines-lollipop {
+    stroke: #606060;
+    stroke-width: 4;
+}
+
+/* Lollipop circles */
+.circle-lollipop {
+    fill: #606060;
+    stroke: #606060;
+}
+
+/* tooltip for hovering */
+.tooltip {
+    position: absolute;
+    text-align: center;
+
+    border: 0px;
+    border-radius: 5px;
+
+    opacity: 0.9;
+    background: black;
+    color: white;
+    fill: white;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+}
+
+

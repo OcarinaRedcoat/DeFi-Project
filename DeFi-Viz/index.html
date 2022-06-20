@@ -1,0 +1,41 @@
+  <!DOCTYPE html>
+
+  <html lang="en">
+
+  <head>
+      <title>Thesis</title>
+      <meta charset="utf-8">
+      <meta name="description" content="Visualizing the Decentralised Finance (DeFi and Cryptocurrencies) World">
+      <meta name="author" content="Ricardo Caetano">
+
+      <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
+      <link rel="stylesheet" href="styles/style.css" />
+      <link rel='stylesheet' href='styles/d3v4-selectable-zoomable-force-directed-graph.css'>
+  </head>
+
+  <body>
+
+      <p class="idiom-title"> Algo Network </p>
+      <div align='center' id="d3_selectable_force_directed_graph"
+          style="width: 2000px; height: 1000px; margin: auto; margin-bottom: 12px">
+          <svg />
+      </div>
+
+
+      <script src="https://d3js.org/d3.v4.js"></script>
+      <script src="js/d3v4-brush-lite.js"></script>
+      <script src="js/d3v4-selectable-force-directed-graph.js"></script>
+
+      <script>
+          var svg = d3.select('#d3_selectable_force_directed_graph');
+
+          d3.json('data/20.json', function (error, graph) {
+              if (!error) {
+                  //console.log('graph', graph);
+                  createV4SelectableForceDirectedGraph(svg, graph);
+              } else {
+                  console.error(error);
+              }
+          });
+      </script>
+  </body>
