@@ -7,17 +7,32 @@
       <meta charset="utf-8">
       <meta name="description" content="Visualizing the Decentralised Finance (DeFi and Cryptocurrencies) World">
       <meta name="author" content="Ricardo Caetano">
-
+      
       <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
       <link rel="stylesheet" href="styles/style.css" />
       <link rel='stylesheet' href='styles/d3v4-selectable-zoomable-force-directed-graph.css'>
+      <link rel='stylesheet' href='styles/hamburger.css'>
+
   </head>
 
   <body>
 
+    <div class="hamburger-menu">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle">
+          <span></span>
+        </label>
+    
+        <ul class="menu__box">
+          <li><a class="menu__item" href="./index.html">Algo Network</a></li>
+          <li><a class="menu__item" href="./metrics.html">Metrics</a></li>
+          <li><a class="menu__item" href="./query.html">Query</a></li>
+        </ul>
+      </div>
+
       <p class="idiom-title"> Algo Network </p>
-      <div align='center' id="d3_selectable_force_directed_graph"
-          style="width: 2000px; height: 1000px; margin: auto; margin-bottom: 12px">
+    <div align='center' id="d3_selectable_force_directed_graph"
+          style="width: 2500px; height: 1240px; margin: auto; margin-bottom: 12px">
           <svg />
       </div>
 

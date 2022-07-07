@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>Thesis</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Visualizing the Decentralised Finance (DeFi and Cryptocurrencies) World">
+  <meta name="author" content="Ricardo Caetano">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/searchbar.css" />
+  <link rel='stylesheet' href='styles/hamburger.css'>
+
+
+
+
+  <!-- CSS FOR STYLING THE PAGE -->
+  <style>
+    table {
+      margin: 0 auto;
+      font-size: large;
+      border: 1px solid black;
+    }
+
+    h1 {
+      text-align: center;
+      color: #006600;
+      font-size: xx-large;
+      font-family: 'Gill Sans',
+        'Gill Sans MT', ' Calibri',
+        'Trebuchet MS', 'sans-serif';
+    }
+
+    td {
+      background-color: #E4F5D4;
+      border: 1px solid black;
+    }
+
+    th,
+    td {
+      font-weight: bold;
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    td {
+      font-weight: lighter;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="hamburger-menu">
+    <input id="menu__toggle" type="checkbox" />
+    <label class="menu__btn" for="menu__toggle">
+      <span></span>
+    </label>
+
+    <ul class="menu__box">
+      <li><a class="menu__item" href="./index.html">Algo Network</a></li>
+      <li><a class="menu__item" href="./metrics.html">Metrics</a></li>
+      <li><a class="menu__item" href="./query.html">Query</a></li>
+    </ul>
+  </div>
+
+  <p class="idiom-title"> Query </p>
+
+  <form>
+    <input id="walletId" type="text" id="fname" name="fname"><br><br>
+    <input id="button" type="button" value="Query" onclick="update()">
+  </form>
+
+  <!-- TABLE CONSTRUCTION-->
+  <table id='table'>
+    <!-- HEADING FORMATION -->
+    <tr>
+      <th>Source Wallet Id</th>
+      <th>Target Wallet Id</th>
+      <th>Ammount Transacted</th>
+      <th>Transaction Id </th>
+      <th>Transaction Timestamp</th>
+    </tr>
+    <script>
+      const button = document.getElementById('button');
+      const paragraph = document.getElementById('p');
+      //button.addEventListener('click', updateButton());
+
+      function update() {
+
+        const walletId = document.getElementById('walletId').value
+
+        $.getJSON("data/10000.json",
+          function (data) {
+            var wallet = '';
+            links = data["links"]
+
+            Object.entries(links).forEach((entry) => {
+              const [key, value] = entry;
+              console.log("=======> " + " || " + `${key}: ${value.source}`);
+              if (walletId == value.source) {
+                wallet += '<tr>';
+                wallet += '<td>' +
+                  value.source + '</td>';
+
+                wallet += '<td>' +
+                  value.target + '</td>';
+
+                wallet += '<td>' +
+                  value.amount + '</td>';
+
+                wallet += '<td>' +
+                  value.id + '</td>';
+
+                wallet += '<td>' +
+                  value.timestamp + '</td>';
+
+                wallet += '</tr>';
+              }
+            });
+
+            //INSERTING ROWS INTO TABLE 
+            $('#table').append(wallet);
+          });
+      }
+
+
+    </script>
+</body>

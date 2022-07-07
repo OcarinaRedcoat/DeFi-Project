@@ -131,5 +131,6 @@ if __name__ == "__main__":
 
     print("Network of ", len(wallet_list), " nodes (wallets) and ", len(tx_list), " edges (transactions)")
     print("Number of SCCs", g.numberSCC)
+    print("Number Nodes", g.V)
 
     print("Done! Time now: {} seconds.".format(time() - start_time))
